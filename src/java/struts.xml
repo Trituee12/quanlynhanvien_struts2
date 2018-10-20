@@ -1,0 +1,84 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+   
+    <!-- Configuration for the default package. -->
+    <package name="default" namespace="/" extends="struts-default">
+        <interceptors>
+            <interceptor class="Interceptor.LoginInterceptor" name="loginInterceptor">
+            </interceptor>
+            <interceptor-stack name="loginStack">
+                <interceptor-ref name="loginInterceptor" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors>
+        <action name="home" class="Action.Listnv">
+            <interceptor-ref name="loginStack" />
+            <result name="success">page/nv/employed.jsp</result>
+            <result name="login" >page/locknv.jsp</result>
+        </action>
+        <action name="department" class="Action.Listnv" method="phongbanlist">
+            <interceptor-ref name="loginStack" />
+            <result name="success">page/pb/Department.jsp</result>
+            <result name="login" >page/locknv.jsp</result>
+        </action>
+        <action name="addnv" class="Action.Listnv" method="phongbanlist">
+            <interceptor-ref name="loginStack" />
+            <result name="success">page/nv/adddem.jsp</result>
+            <result name="login" >page/locknv.jsp</result>
+        </action>
+        <action name="addpb" >
+            <interceptor-ref name="loginStack" />
+            <result name="success">page/pb/adddpb.jsp</result>
+            <result name="login" >page/locknv.jsp</result>
+        </action>
+        <action name="editnv" class="Action.UpdateAction">
+            <interceptor-ref name="loginStack" />
+            <result name="success">page/nv/editemployed.jsp</result>
+            <result name="login" >page/locknv.jsp</result>
+        </action>
+        <action name="editpb" class="Action.UpdatePBAction">
+            <interceptor-ref name="loginStack" />
+            <result name="success">page/pb/editpb.jsp</result>
+            <result name="login" >page/locknv.jsp</result>
+        </action>
+        <action name="login" class="Action.LoginAction" >
+          
+            <result name="success" type="redirect">home</result>
+            <result name="input" >/page/login.jsp</result>
+      
+        </action>
+        <action name="addem" class="Action.InsertNV">
+            <result name="success" type="redirect">home</result>
+            <result name="input">page/nv/addem.jsp</result>
+        </action>
+        <action name="addde" class="Action.InsertPB">
+            <result name="success" type="redirect">department</result>
+            <result name="input">page/nv/addpb.jsp</result>
+        </action>
+         <action name="editem" class="Action.UpdateAction" method="updateNV">
+            <result name="success" type="redirect">home</result>
+            <result name="input">page/nv/editemployed.jsp</result>
+        </action>
+        <action name="editde" class="Action.UpdatePBAction" method="updatePB">
+            <result name="success" type="redirect">department</result>
+            <result name="input" type="redirect">editpb</result>
+        </action>
+        <action name="del" class="Action.DeleteAction">
+            <result name="success" type="redirect">home</result>
+        </action>
+        <action name="delPB" class="Action.DeleteAction" method="deletePB">
+            <result name="success" type="redirect">department</result>
+        </action>
+        <action name="logOut" class="Action.LoginAction" method="logOut">
+            <result name="success" type="redirect">login</result>
+        </action>
+        <action name="nvpb" class="Action.NhanvienPB">
+            <interceptor-ref name="loginStack" />
+            <result name="success" >page/pb/pb_1.jsp</result>
+            <result name="login" >page/locknv.jsp</result>
+        </action>
+    </package>
+</struts>

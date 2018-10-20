@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 14, 2018 10:28:31 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Nhanvien" table="nhanvien" catalog="demodb" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="phongban" class="entity.Phongban" fetch="select">
+            <column name="maphongban" length="2" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="100" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="3" />
+        </property>
+        <property name="birthday" type="string">
+            <column name="birthday" length="10" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="100" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="11" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" />
+        </property>
+        <property name="luong" type="java.lang.Integer">
+            <column name="luong" />
+        </property>
+    </class>
+</hibernate-mapping>
